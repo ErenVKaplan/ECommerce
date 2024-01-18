@@ -1,0 +1,41 @@
+﻿@using Project.Data.ViewModels.Admin;
+
+@{
+    ViewData["Title"] = "Products";
+}
+@model List<ProductListViewModel>
+
+
+<div class="row">
+    <div class="table table-striped-columns col-md-6">
+        <h1>Ürün Bilgileri</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Açıklaması</th>
+                    <th>Ürün Özellikleri</th>
+                    <th>Ürün Fiyatı</th>
+                    <th>Güncelle</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.ProductName</td>
+                        <td>@product.ProductDescription</td>
+                        <td>@product.ProductFeatures</td>
+                        <td>@product.ProductPrice</td>
+                        
+                        <td><a asp-action="UpdateProduct" asp-area="Admin" asp-controller="Product" asp-route-id="@product.id" class="btn btn-primary">Güncelle</a></td>
+
+                        <td><a asp-action="DeleteProduct" asp-area="Admin" asp-controller="Product" asp-route-id="@product.id" class="btn btn-danger">Sil</a></td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

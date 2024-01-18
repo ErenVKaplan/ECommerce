@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "UserOrders";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@model List<Order>
+<div class="row">
+    <div class="table table-striped-columns col-md-6">
+        <h1>Geçmiş Siparişlerim</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sipariş ID</th>
+                    <th>Sipariş Adresi</th>
+                    <th>Sipariş Ücreti</th>
+                    <th>Ödeme Yöntemi</th>
+                    <th>Gönderim Yöntemi</th>
+                    <th>Sipariş Tarihi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.DeliverAddress</td>
+                        <td>@order.TotalPrice</td>
+                        <td>@order.PaymentMethod</td>
+                        <td>@order.ShippingMethod</td>
+                        <td>@order.CreatedDate</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

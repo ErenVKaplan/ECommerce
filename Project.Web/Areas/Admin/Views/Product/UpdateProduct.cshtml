@@ -1,0 +1,43 @@
+﻿@using Project.Data.ViewModels.Admin;
+@{
+    ViewData["Title"] = "UpdateProduct";
+}
+
+@model ProductAddViewModel
+
+<form asp-action="UpdateProduct" asp-area="Admin" asp-controller="Product" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" asp-for="id" />
+
+    <div class="form-group">
+        <label for="ProductName" asp-for="ProductName">Ürün Adı</label>
+        <input type="text" class="form-control" asp-for="ProductName" value="@Model.ProductName" />
+    </div>
+
+    <div class="form-group">
+        <label for="ProductDescription">Ürün Açıklaması</label>
+        <textarea class="form-control" asp-for="ProductDescription">@Model.ProductDescription</textarea>
+    </div>
+    <div class="form-group">
+        <label for="ProductFeatures">Ürün Özellikleri</label>
+        <textarea class="form-control" asp-for="ProductFeatures">@Model.ProductFeatures</textarea>
+    </div>
+    <div class="form-group">
+        <label for="ProductPrice">Ürün Fiyatı</label>
+        <input class="form-control" asp-for="ProductPrice" value="@Model.ProductPrice"/>
+    </div>
+
+
+    <div class="form-group">
+        <label for="ProductDiscount">Ürün İndirimi</label>
+        <input class="form-control" asp-for="ProductDiscount" value="@Model.ProductDiscount" />
+    </div>
+
+    <div class="form-group">
+        <label for="PictureUrl">Ürün Resmi</label>
+        <input type="file" class="form-control-file" asp-for="PictureUrl" />
+    </div>
+
+    <input type="submit" value="Güncelle" class="btn btn-primary" />
+
+</form>

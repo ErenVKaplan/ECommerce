@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "UserEdit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@model UserProfileViewModel
+@section Scripts
+    {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h2>Üye Bilgileri Güncelleme </h2>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert">
+        </div>
+
+
+        <form asp-action="Profile" asp-controller="UserProfile" asp-area="Account" method="post">
+
+
+            <div class="row mb-3">
+                <label for="UserName" class="col-md-4 col-form-label" asp-for="UserName"></label>
+                <div class="col-md-8">
+                    <input asp-for="UserName" class="form-control">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="FirstName" class="col-md-4 col-form-label" asp-for="FirstName"></label>
+                <div class="col-md-8">
+                    <input asp-for="FirstName" class="form-control">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="LastName" class="col-md-4 col-form-label" asp-for="LastName"></label>
+                <div class="col-md-8">
+                    <input asp-for="LastName" class="form-control">
+                    <span asp-validation-for="LastName" class="text-LastName"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Email" class="col-md-4 col-form-label" asp-for="Email"></label>
+                <div class="col-md-8">
+                    <input asp-for="Email" class="form-control">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Phone" class="col-md-4 col-form-label" asp-for="PhoneNumber"></label>
+                <div class="col-md-8">
+                    <input asp-for="PhoneNumber" class="form-control">
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="BirthDate" class="col-md-4 col-form-label" asp-for="BirthDate"></label>
+                <div class="col-md-8">
+                    <input asp-for="BirthDate" class="form-control">
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="City" class="col-md-4 col-form-label" asp-for="Address"></label>
+                <div class="col-md-8">
+                    <input asp-for="Address" class="form-control">
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="Gender" class="col-md-4 col-form-label" asp-for="Gender"></label>
+                <div class="col-md-8">
+                    <select asp-for="Gender" class="form-control" asp-items="ViewBag.Gender">
+                        <option value="0">Cinsiyet Seçiniz</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row mb-3">
+
+                <div class="col-md-8 offset-md-4">
+                    <button type="submit" class="btn btn-secondary">Güncelle</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

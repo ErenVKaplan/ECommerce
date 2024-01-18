@@ -1,0 +1,80 @@
+﻿@using Project.Data.ViewModels.Admin;
+@{
+    ViewData["Title"] = "ProductEdit";
+}
+@model ProductAddViewModel
+@section Scripts
+    {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h2>Ürün bilgisi ekleme </h2>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert">
+        </div>
+
+
+        <form asp-action="ProductAdd" asp-controller="Product" asp-area="Admin" method="post" enctype="multipart/form-data">
+
+
+            <div class="row mb-3">
+                <label for="ProductName" class="col-md-4 col-form-label" asp-for="ProductName"></label>
+                <div class="col-md-8">
+                    <input asp-for="ProductName" class="form-control">
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="ProductDescription" class="col-md-4 col-form-label" asp-for="ProductDescription"></label>
+                <div class="col-md-8">
+                    <input asp-for="ProductDescription" class="form-control">
+                    <span asp-validation-for="ProductDescription" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="ProductFeatures" class="col-md-4 col-form-label" asp-for="ProductFeatures"></label>
+                <div class="col-md-8">
+                    <input asp-for="ProductFeatures" class="form-control">
+                    <span asp-validation-for="ProductFeatures" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="ProductPrice" class="col-md-4 col-form-label" asp-for="ProductPrice"></label>
+                <div class="col-md-8">
+                    <input asp-for="ProductPrice" class="form-control">
+                    <span asp-validation-for="ProductPrice" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="ProductDiscount" class="col-md-4 col-form-label" asp-for="ProductDiscount"></label>
+                <div class="col-md-8">
+                    <input asp-for="ProductDiscount" class="form-control">
+                    <span asp-validation-for="ProductDiscount" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="PictureUrl" class="col-md-4 col-form-label" asp-for="PictureUrl"></label>
+                <div class="col-md-8">
+                    <input type="file" asp-for="PictureUrl" class="form-control">
+                    <span asp-validation-for="PictureUrl" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+
+                <div class="col-md-8 offset-md-4">
+                    <button type="submit" class="btn btn-secondary">Ekle</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

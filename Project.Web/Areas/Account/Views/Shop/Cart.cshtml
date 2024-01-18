@@ -1,0 +1,169 @@
+﻿@using Project.Data.ViewModels.Shop;
+@using Project.Service.Services.Abstract;
+@using Project.Web.Extensions;
+@inject IProductService productService;
+@inject IHttpContextAccessor httpcontextaccessor;
+@{
+    ViewData["Title"] = "Cart";
+	Layout = "~/Views/Shared/_MainLayout.cshtml";
+	var cart = httpcontextaccessor.HttpContext.Session.GetObject<Dictionary<Guid, int>>("cart");
+	List<BasketProduct> products = new List<BasketProduct>();
+}
+@model OrderViewModel
+@if (cart != null)
+{
+	products = productService.GetProductsFromIds(cart);
+}
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-12">
+				<h3 class="breadcrumb-header">Checkout</h3>
+				<ul class="breadcrumb-tree">
+					<li><a href="#">Home</a></li>
+					<li class="active">Checkout</li>
+				</ul>
+			</div>
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		
+		<div class="row">
+			<form asp-area="Account" asp-action="Cart" asp-controller="Shop" method="post">
+			<div class="col-md-7">
+				<!-- Billing Details -->
+				<div class="billing-details">
+					<div class="section-title">
+						<h3 class="title">Ödeme Adresi</h3>
+					</div>
+					
+					<div class="form-group">
+						<input class="input" type="text" asp-for="DeliverAddress" placeholder="Teslimat Adresi">
+					</div>
+						<div class="form-group" style="display: none;">
+							<input class="input" asp-for="TotalPrice" readonly />
+						</div>
+						<div class="row mb-3">
+							<label for="ShippingMethod" class="col-md-4 col-form-label" asp-for="ShippingMethod"></label>
+							<div class="col-md-8">
+								<select asp-for="ShippingMethod" class="form-control" asp-items="ViewBag.ShippingMethod">
+									<option value="0">Kargolama Firması Seçiniz</option>
+								</select>
+								<span asp-validation-for="ShippingMethod" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="PaymentMethod" class="col-md-4 col-form-label" asp-for="PaymentMethod"></label>
+							<div class="col-md-8">
+								<select asp-for="ShippingMethod" class="form-control" asp-items="ViewBag.PaymentMethod">
+									<option value="0">Ödeme Yöntemi Seçiniz</option>
+								</select>
+								<span asp-validation-for="PaymentMethod" class="text-danger"></span>
+							</div>
+						</div>
+					
+					
+				</div>
+				
+				
+			</div>
+				<!-- Order Details -->
+				<div class="col-md-5 order-details">
+					<div class="section-title text-center">
+						<h3 class="title">Siparişiniz</h3>
+					</div>
+					<div class="order-summary">
+						<div class="order-col">
+							<div><strong>Ürünler</strong></div>
+							<div><strong>Ücret</strong></div>
+						</div>
+						<div class="order-products">
+							@foreach (var item in products)
+							{
+								<div class="order-col">
+									<div>@item.Product.ProductName</div>
+									<div>$@item.Product.ProductPrice</div>
+								</div>
+							}
+							@*<div class="order-col">
+							<div>2x Product Name Goes Here</div>
+							<div>$980.00</div>
+							</div>*@
+						</div>
+						<div class="order-col">
+							<div>Shiping</div>
+							<div><strong>FREE</strong></div>
+						</div>
+						<div class="order-col">
+							<div><strong>TOTAL</strong></div>
+							<div><strong class="order-total">$@products.Sum(x => x.Quantity * (x.Product.ProductPrice - (x.Product.ProductPrice * (x.Product.ProductDiscount / 100))))</strong></div>
+						</div>
+					</div>
+
+					<div class="input-checkbox">
+						<input type="checkbox" id="terms">
+						<label for="terms">
+							<span></span>
+							Okudum,onaylıyorum <a href="#">terms & conditions</a>
+						</label>
+					</div>
+					<button type="submit" class="primary-btn order-submit">Sipariş ver</button>
+				</div>
+			</form>
+		</div>
+			
+			<!-- /Order Details -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="newsletter">
+					<p>Problemleriniz İçin<strong>Bize Ulaşın</strong></p>
+					<form asp-controller="Home" asp-action="NeedHelp" asp-area="" method="post">
+						<input class="input" type="email" name="Email" placeholder="Emailinizi giriniz:">
+						<input class="input" type="textarea" name="Text" placeholder="Probleminizi Yazınız:">
+						<button type="submit" class="newsletter-btn"><i class="fa fa-envelope"></i>Gönder</button>
+					</form>
+					<ul class="newsletter-follow">
+						<li>
+							<a href="#"><i class="fa fa-facebook"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-twitter"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-instagram"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-pinterest"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
+

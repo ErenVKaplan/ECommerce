@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApplication1</title>
+
+
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <link  rel="stylesheet" href="~/Electro/css/bootstrap.min.css" />
+    <link  rel="stylesheet" href="~/Electro/css/slick.css" />
+    <link  rel="stylesheet" href="~/Electro/css/slick-theme.css" />
+    <link  rel="stylesheet" href="~/Electro/css/nouislider.min.css" />
+    <link rel="stylesheet"  href="~/Electro/css/font-awesome.min.css" />
+    <link  rel="stylesheet" href="~/Electro/css/style.css" />
+   
+        
+    
+    @await RenderSectionAsync("Css",required:false)
+</head>
+<body>
+   <partial name="~/PartialViews/_NavbarHomePartialView.cshtml" />
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+     <partial name="~/PartialViews/_FooterHomePartialView.cshtml" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/Electro/js/bootstrap.min.js"></script>
+    <script src="~/Electro/js/slick.min.js"></script>
+    <script src="~/Electro/js/nouislider.min.js"></script>
+    <script src="~/Electro/js/jquery.zoom.min.js"></script>
+    <script src="~/Electro/js/main.min.js"></script>
+    <script src="~/Electro/js/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @await Component.InvokeAsync("NToastNotify")
+</body>
+</html>
